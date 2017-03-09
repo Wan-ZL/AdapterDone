@@ -3,6 +3,9 @@ package _todoInSection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+
 import model.Student;
 
 /**
@@ -16,7 +19,7 @@ import model.Student;
 // (after adding implements TableModel to the class heading).
 //
 // Note: Some TableModel methods need not be implemented.
-public class StudentCollection  {
+public class StudentCollection implements TableModel {
 
   private List<Student> theStudents;
 
@@ -61,5 +64,90 @@ public class StudentCollection  {
     }
     return null; // not found
   }
+
+@Override
+public int getRowCount() {
+	// TODO Auto-generated method stub
+	return size();
+}
+
+@Override
+public int getColumnCount() {
+	// TODO Auto-generated method stub
+	return 4;
+}
+
+@Override
+public String getColumnName(int columnIndex) {
+	if(columnIndex == 0){
+		return "Name";
+	}
+	else if(columnIndex == 1){
+		return "Major";
+	}
+	else if(columnIndex == 2){
+		return "GPA";
+	}
+	else{
+		return "Age";
+	}
+}
+
+@Override
+public Class<?> getColumnClass(int columnIndex) {
+	if(columnIndex == 0){
+		return String.class;
+	}
+	else if(columnIndex == 1){
+		return String.class;
+	}
+	else if(columnIndex == 2){
+		return Double.class;
+	}
+	else{
+		return Integer.class;
+	}
+}
+
+@Override
+public boolean isCellEditable(int rowIndex, int columnIndex) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public Object getValueAt(int rowIndex, int columnIndex) {
+	Student theStudent = theStudents.get(rowIndex);
+	if(columnIndex == 0){
+		return theStudent.getName();
+	}
+	else if(columnIndex == 1){
+		return theStudent.getMajor();
+	}
+	else if(columnIndex == 2){
+		return theStudent.getGPA();
+	}
+	else{
+		return theStudent.getAge();
+	}
+}
+
+@Override
+public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void addTableModelListener(TableModelListener l) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void removeTableModelListener(TableModelListener l) {
+	// TODO Auto-generated method stub
+	
+}
 
 }
